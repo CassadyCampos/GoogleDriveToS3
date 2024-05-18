@@ -1,6 +1,13 @@
+ How to Push Changes
+1. Zip dir contents
+
+2. Execute AWS CLI Command
+
  aws lambda update-function-code `
      --function-name GoogleDriveToS3 `
      --zip-file fileb://C:\Users\Cassady\Documents\GitHub\GoogleDriveToS3\GoogleDriveToS3.zip
+
+Make sure zip path is correct
 
 
 EXPECTED FILE FORMATS FOR TANGERINE:
@@ -23,3 +30,4 @@ All unrelated and can be done in any order:
 
 
 ~~* Get credentials.json into a vault so we can remove it from source code~~
+
