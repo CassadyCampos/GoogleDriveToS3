@@ -4,3 +4,5 @@ credentials.json
 *.CSV
 
 example.js
+
+output.json

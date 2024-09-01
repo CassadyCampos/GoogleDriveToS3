@@ -40,18 +40,19 @@ exports.handler = async (event) => {
 
     const result = await runTransformationLambda(event);
 
+
+    const payload = JSON.parse(result.Payload);
+    const body = JSON.parse(payload.body);
+    console.log(body.message);
+
     console.log("Starting uploadFromS3ToDrive...");
     await uploadFromS3ToDrive(authClient);
-
-    // const payload = JSON.parse(result.Payload);
-    // const body = JSON.parse(payload.body);
-    // console.log(body.message);
 
     
     return {
       statusCode: 200,
-      // body: "Success: " + body.message
-      body: "Success: done "
+      body: "Success: " + body.message
+      // body: "Success: done "
     }
   }
   catch (error) {

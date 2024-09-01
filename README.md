@@ -1,16 +1,24 @@
- How to Push Changes
-1. Zip dir contents
-
-2. Execute AWS CLI Command
-
+ # How to Push Changes
+## 1. Run Powershell script to .zip and deploy to lambda
+```
+./deploy.ps1
+```
+## 2. Execute AWS CLI Command
+```
  aws lambda update-function-code `
      --function-name GoogleDriveToS3 `
      --zip-file fileb://C:\Users\Cassady\Documents\GitHub\GoogleDriveToS3\GoogleDriveToS3.zip
+```
+## 3. Execute AWS Lambda from CLI
+```
+aws lambda invoke --function-name GoogleDriveToS3 output.json
+```
+
 
 Make sure zip path is correct
 
 
-EXPECTED FILE FORMATS FOR TANGERINE:
+## EXPECTED FILE FORMATS FOR TANGERINE:
 tangerine_<month>_<year>_transactions.csv
 i.e. tangerine_november_2024_transactions.csv
 
@@ -20,14 +28,21 @@ i.e. tangerine_november_2024_transformed.xlsx
 
 If the name is incorrect you may end up with a corrupted file lol.
 
-TODO's
+## TODO's
 
 All unrelated and can be done in any order:
+* Fix deploy.ps1 because it's deleting the .zip after uploading it. Maybe we can update or remove/create again in the same script.
 
-~~* Hook up Google Drive API call to grab files to upload so we can stop using hardcoded string file~~
+* Create a webscraper to download the tangerine csvs and then dropping it in gdrive
 
-* Have another lambda that downloads from the bucket and the transformed folder and upload it back to Google Drive
+* Create a TD parser for the CSV data it generates
+
+* Create a webscraper to download TD csv's and then dropping it in gdrive
+
+* ~~ Hook up Google Drive API call to grab files to upload so we can stop using hardcoded string file~~
+
+* ~~ Have another lambda that downloads from the bucket and the transformed folder and upload it back to Google Drive~~
 
 
-~~* Get credentials.json into a vault so we can remove it from source code~~
+* ~~ Get credentials.json into a vault so we can remove it from source code~~
 
