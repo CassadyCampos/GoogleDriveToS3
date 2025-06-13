@@ -26,7 +26,7 @@ Function Zip-Directory {
         # Create the zip archive
         Write-Output "Zipping Silly from $FilesToZip.FullName to destination $ZipFilePath" 
 
-        Compress-Archive -Path $FilesToZip.FullName -DestinationPath $ZipFilePath
+        Compress-Archive -Path $FilesToZip.FullName -DestinationPath $ZipFilePath -Force
 
         Write-Output "Successfully created zip file: $ZipFilePath"
         return $true
@@ -45,7 +45,8 @@ Function Upload-ToLambda {
         # Ensure the AWS CLI is configured properly and available    
         $UploadResult = aws lambda update-function-code `
         --function-name GoogleDriveToS3 `
-        --zip-file fileb://C:\Users\Cassady\Documents\GitHub\GoogleDriveToS3\GoogleDriveToS32.zip
+        --zip-file "fileb://$(Join-Path $CurrentDirectory $ZipFileName)"
+
 
         if ($UploadResult) {
             Write-Output "Successfully uploaded zip file to Lambda: $LambdaFunctionName"
